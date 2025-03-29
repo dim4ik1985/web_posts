@@ -18,25 +18,30 @@
 * Django 3.2+
 * Django REST framework 3.12+
 * PostgreSQL 10+
+* Swagger 3.0+
 
 ## Установка
 
 1. Клонировать репозиторий: `git clone https://github.com/dim4ik1985/web_posts.git`
-2. Установить зависимости: `pip install -r requirements.txt`
-3. Создать базу данных
-4. В корне проекта создаем файл `.env`
-```.dotenv
-DJANGO_SECRET_KEY='some secret key'
-DEBUG='False'
-DB_NAME='name_of_database'
-DB_USER='username'
-DB_PASSWORD='password'
-DB_HOST='localhost'
-DB_PORT='port'
-```
+2. Переходим в папку проекта: `cd web_posts/`
+3. Проверяем версию poetry: `poetry --version`
+4. Если не установлено, установить poetry: `curl -sSL https://install.python-poetry.org | python3 -`
+5. Установить зависимости: `poetry install`
+6. Создать базу данных `postgresql`
+7. В корне проекта создаем файл `.env`
+    ```.dotenv
+    SECRET_KEY='some secret key'
+    DEBUG=bool(True or False)    # True debug, False release
+    DB_NAME='name_of_database'
+    DB_USER='username'
+    DB_PASSWORD='password'
+    DB_HOST='localhost'
+    DB_PORT='port'
+    ```
+8. Выполнить миграции: `poetry run python manage.py migrate`
+9. Создать админа `poetry run python manage.py createsuperuser
+10. Запустить сервер разработки: `poetry run python manage.py runserver`
 
-5. Выполнить миграции: `python manage.py migrate`
-6. Запустить сервер разработки: `python manage.py runserver`
 
 ## ЭНДПОИНТЫ
 

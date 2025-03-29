@@ -1,5 +1,11 @@
-.env
-venv
-
+# IDE
 .idea
 
+# Django
+*.pyc
+__pycache__/
+.env
+
+# Миграции
+*/migrations/*
+!*/migrations/__init__.py

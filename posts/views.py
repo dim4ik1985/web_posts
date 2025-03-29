@@ -54,5 +54,3 @@ class CommentViewSet(ModelViewSet):
         if self.action in ['update', 'partial_update', 'destroy']:  # UPDATE, DELETE: администратор/пользователь может редактировать/удалять только себя.
             return [IsAdminOrAuthor()]
         return [AllowAny()]  # READ: все пользователи.
-
-

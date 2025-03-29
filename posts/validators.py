@@ -1,4 +1,6 @@
 import re
+
+from datetime import date
 from django.core.exceptions import ValidationError
 
 
@@ -28,16 +30,20 @@ def validate_email(value):
             f"Разрешены только следующие домены: {', '.join(allowed_domains)}"
         )
 
+    return value
+
 
 def validate_author_age(birth_date):
     """
     Валидация возраста (18+)
     """
-    from datetime import date
+    print(birth_date)
     today = date.today()
     age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
     if age < 18:
         raise ValidationError("Пользователь должен быть старше 18 лет")
+
+    return birth_date
 
 def validate_title(value):
     """
@@ -48,3 +54,5 @@ def validate_title(value):
     for word in forbidden_words:
         if word in lower_value:
             raise ValidationError(f"Текст содержит запрещенное слово: '{word}'")
+
+    return value
