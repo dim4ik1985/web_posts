@@ -2,7 +2,12 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from posts.validators import validate_email, validate_password, validate_title, validate_author_age
+from posts.validators import (
+    validate_author_age,
+    validate_email,
+    validate_password,
+    validate_title,
+)
 
 
 # Пользователь
@@ -12,7 +17,7 @@ class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    REQUIRED_FIELDS = ['birth_date']
+    REQUIRED_FIELDS = ["birth_date"]
 
     def clean(self):
         super().clean()
@@ -27,18 +32,18 @@ class User(AbstractUser):
         return self.username
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
 
 
 # Пост
 class Post(models.Model):
     title = models.CharField(max_length=255, validators=[validate_title])
     content = models.TextField()
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image = models.ImageField(upload_to="images/", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
 
     def clean(self):
         if self.author:
@@ -50,14 +55,14 @@ class Post(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Пост'
-        verbose_name_plural = 'Посты'
+        verbose_name = "Пост"
+        verbose_name_plural = "Посты"
 
 
 # Комментарий
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
