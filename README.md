@@ -27,8 +27,9 @@
 3. Проверяем версию poetry: `poetry --version`
 4. Если не установлено, установить poetry: `curl -sSL https://install.python-poetry.org | python3 -`
 5. Установить зависимости: `poetry install`
-6. Создать базу данных `postgresql`
-7. В корне проекта создаем файл `.env`
+6. Активировать виртуальное окружение: `source $(poetry env info --path)/bin/activate`
+7. Создать базу данных `postgresql`
+8. В корне проекта создаем файл `.env`
     ```.dotenv
     SECRET_KEY='some secret key'
     DEBUG=bool(True or False)    # True debug, False release
@@ -38,9 +39,9 @@
     DB_HOST='localhost'
     DB_PORT='port'
     ```
-8. Выполнить миграции: `poetry run python manage.py migrate`
-9. Создать админа `poetry run python manage.py createsuperuser
-10. Запустить сервер разработки: `poetry run python manage.py runserver`
+9. Выполнить миграции: `poetry run python manage.py migrate`
+10. Создать админа `poetry run python manage.py createsuperuser`
+11. Запустить сервер разработки: `poetry run python manage.py runserver`
 
 
 ## ЭНДПОИНТЫ
